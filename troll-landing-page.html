@@ -1,0 +1,479 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥 IA que genera dinero GRATIS - Oferta por 24h</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* BARRA DE URGENCIA */
+    .urgency-bar {
+      background: #ff4444;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #00f5ff, #bf5af2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-badge {
+      background: #00c853;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 60px;
+    }
+    .badge-top {
+      display: inline-block;
+      background: rgba(191,90,242,0.2);
+      border: 1px solid #bf5af2;
+      color: #bf5af2;
+      padding: 6px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: linear-gradient(90deg, #00f5ff, #bf5af2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 36px;
+      font-weight: 900;
+      color: #00f5ff;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* BOTÓN PRINCIPAL TROLL */
+    .cta-btn {
+      background: linear-gradient(135deg, #00f5ff, #bf5af2);
+      color: white;
+      border: none;
+      padding: 22px 60px;
+      font-size: 22px;
+      font-weight: 900;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 40px rgba(0,245,255,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 60px rgba(0,245,255,0.6);
+    }
+    .cta-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 50px;
+      height: 200%;
+      background: rgba(255,255,255,0.3);
+      transform: skewX(-20deg);
+      animation: shine 2s infinite;
+    }
+    @keyframes shine {
+      0% { left: -60%; }
+      100% { left: 150%; }
+    }
+
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+    .trust-item { display: flex; align-items: center; gap: 5px; }
+
+    /* CONTADOR */
+    .timer-section {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .timer-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ff4444;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .timer {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+    .timer-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 16px 24px;
+      min-width: 80px;
+      text-align: center;
+    }
+    .timer-num {
+      font-size: 40px;
+      font-weight: 900;
+      color: #00f5ff;
+      display: block;
+    }
+    .timer-unit {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+    }
+
+    /* FEATURES */
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 40px 60px;
+      flex-wrap: wrap;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 260px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-6px); }
+    .feature-icon { font-size: 36px; margin-bottom: 14px; }
+    .feature-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    /* TESTIMONIOS */
+    .testimonials {
+      padding: 60px 60px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 40px;
+    }
+    .testimonial-grid {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .testimonial {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 300px;
+      text-align: left;
+    }
+    .testimonial-text { font-size: 15px; color: rgba(255,255,255,0.8); line-height: 1.5; margin-bottom: 16px; }
+    .testimonial-author { font-weight: 700; font-size: 14px; }
+    .testimonial-role { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .stars { color: #f5c518; margin-bottom: 10px; }
+
+    /* PANEL DE VIDEOS TROLL (oculto hasta clic) */
+    #troll-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.15);
+      z-index: 9999;
+      pointer-events: none;
+    }
+    .troll-video {
+      position: fixed;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      z-index: 10000;
+    }
+    #v1 { top: 5%; left: 2%; width: 380px; height: 220px; }
+    #v2 { top: 5%; right: 2%; width: 380px; height: 220px; }
+    #v3 { bottom: 5%; left: 50%; transform: translateX(-50%); width: 380px; height: 220px; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: rgba(255,255,255,0.3);
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA URGENCIA -->
+  <div class="urgency-bar">
+    ⚡ OFERTA EXPIRA EN MENOS DE 24H — Solo quedan 7 accesos gratuitos disponibles ⚡
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">⚡ MoneyAI Pro</div>
+    <div class="nav-badge">🟢 Gratis por tiempo limitado</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge-top">🚀 Inteligencia Artificial · Versión 3.0</div>
+    <h1>
+      La IA que genera<br>
+      <span>dinero real</span> mientras<br>
+      tú duermes
+    </h1>
+    <p>
+      Más de 142,000 personas ya generan entre $500 y $5,000 al mes
+      usando nuestro sistema de automatización con IA. Sin experiencia. Sin inversión.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">142K+</div>
+        <div class="stat-label">Usuarios activos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">$4.2M</div>
+        <div class="stat-label">Generados este mes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">98.7%</div>
+        <div class="stat-label">Tasa de éxito</div>
+      </div>
+    </div>
+
+    <!-- BOTÓN TROLL -->
+    <button class="cta-btn" onclick="activarTroll()">
+      🎯 ACTIVAR MI CUENTA GRATIS
+    </button>
+
+    <div class="trust-row">
+      <div class="trust-item">🔒 100% Seguro</div>
+      <div class="trust-item">✅ Sin tarjeta de crédito</div>
+      <div class="trust-item">⚡ Acceso inmediato</div>
+      <div class="trust-item">💯 Garantía total</div>
+    </div>
+  </section>
+
+  <!-- CONTADOR -->
+  <div class="timer-section">
+    <div class="timer-label">⏰ Tu oferta expira en:</div>
+    <div class="timer">
+      <div class="timer-box"><span class="timer-num" id="hrs">23</span><span class="timer-unit">horas</span></div>
+      <div class="timer-box"><span class="timer-num" id="min">47</span><span class="timer-unit">min</span></div>
+      <div class="timer-box"><span class="timer-num" id="sec">00</span><span class="timer-unit">seg</span></div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🤖</div>
+      <div class="feature-title">IA Avanzada</div>
+      <div class="feature-desc">Nuestro modelo analiza mercados en tiempo real y genera estrategias automáticas.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💸</div>
+      <div class="feature-title">Ganancias 24/7</div>
+      <div class="feature-desc">El sistema trabaja mientras duermes, come o ves Netflix.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <div class="feature-title">100% Legal</div>
+      <div class="feature-desc">Cumplimos con todas las regulaciones internacionales. Tu dinero, seguro.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <div class="feature-title">Resultados Reales</div>
+      <div class="feature-desc">Sin promesas vacías. Resultados verificables desde la primera semana.</div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIOS -->
+  <section class="testimonials">
+    <div class="section-title">Lo que dicen nuestros usuarios</div>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"Empecé con cero experiencia. En 3 semanas ya había generado mis primeros $1,200. Esto es real."</div>
+        <div class="testimonial-author">María G.</div>
+        <div class="testimonial-role">Diseñadora, México</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"Pensé que era otro fraude. Me equivoqué. Este mes saqué $3,800 sin hacer absolutamente nada."</div>
+        <div class="testimonial-author">Carlos R.</div>
+        <div class="testimonial-role">Contador, Argentina</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <div class="testimonial-text">"Mi jefe me preguntó por qué estaba tan contento. No le dije que ya gano más que él con MoneyAI."</div>
+        <div class="testimonial-author">Luis T.</div>
+        <div class="testimonial-role">Empleado, Colombia</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 MoneyAI Pro · Todos los derechos reservados · Los resultados pueden variar · Términos y condiciones
+  </footer>
+
+  <!-- OVERLAY TROLL (invisible hasta clic) -->
+  <div id="troll-overlay"></div>
+
+  <!-- AUDIOS (reemplaza src con tus archivos) -->
+  <audio id="audio1" src="audios/airhorn.mp3" loop></audio>
+  <audio id="audio2" src="audios/bruh.mp3" loop></audio>
+  <audio id="audio3" src="audios/windows_xp_error.mp3" loop></audio>
+
+  <script>
+    // ---- CONTADOR FALSO ----
+    let h = 23, m = 47, s = 0;
+    setInterval(() => {
+      s--;
+      if (s < 0) { s = 59; m--; }
+      if (m < 0) { m = 59; h--; }
+      if (h < 0) { h = 23; m = 59; s = 59; }
+      document.getElementById('hrs').textContent = String(h).padStart(2,'0');
+      document.getElementById('min').textContent = String(m).padStart(2,'0');
+      document.getElementById('sec').textContent = String(s).padStart(2,'0');
+    }, 1000);
+
+    // ---- FUNCIÓN TROLL ----
+    function activarTroll() {
+
+      // 1. Reproducir los 3 audios al mismo tiempo y a todo volumen
+      const audios = ['audio1','audio2','audio3'];
+      audios.forEach(id => {
+        const a = document.getElementById(id);
+        a.volume = 1.0;
+        a.play();
+      });
+
+      // 2. Mostrar overlay
+      document.getElementById('troll-overlay').style.display = 'block';
+
+      // 3. Crear y reproducir los 3 videos al mismo tiempo
+      const videoSources = [
+        'videos/rickroll.mp4',
+        'videos/john_cena.mp4',
+        'videos/nyan_cat.mp4'
+      ];
+      const positions = [
+        { top:'5%',  left:'2%',  right:'auto', bottom:'auto' },
+        { top:'5%',  right:'2%', left:'auto',  bottom:'auto' },
+        { bottom:'5%', left:'50%', transform:'translateX(-50%)', top:'auto' }
+      ];
+
+      videoSources.forEach((src, i) => {
+        const vid = document.createElement('video');
+        vid.src = src;
+        vid.autoplay = true;
+        vid.loop = true;
+        vid.muted = false;
+        vid.volume = 1.0;
+        vid.controls = false;
+        vid.style.position = 'fixed';
+        vid.style.width = '380px';
+        vid.style.height = '220px';
+        vid.style.borderRadius = '12px';
+        vid.style.zIndex = '10000';
+        vid.style.boxShadow = '0 0 30px rgba(0,0,0,0.8)';
+        vid.style.objectFit = 'cover';
+
+        Object.entries(positions[i]).forEach(([k,v]) => {
+          vid.style[k] = v;
+        });
+
+        document.body.appendChild(vid);
+        vid.play();
+      });
+
+      // 4. Cambiar el botón para que sea parte del chiste
+      document.querySelector('.cta-btn').textContent = '😂 JAJAJA TE TROLÉ';
+      document.querySelector('.cta-btn').style.background = '#ff4444';
+    }
+  </script>
+
+</body>
+</html>
+joto el que lo leea
+
+
