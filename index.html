@@ -1,147 +1,24 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡ALERTA DE SEGURIDAD! Sistema Comprometido</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body, html {
-            width: 100%;
-            height: 100%;
-            background-color: #050505;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-        }
-
-        /* Pantalla de Cebo */
-        .scare-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, #1a1111 0%, #070202 100%);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 30px;
-            cursor: pointer;
-        }
-
-        .alert-icon {
-            width: 80px;
-            height: 80px;
-            background-color: #e81123;
-            color: white;
-            font-size: 50px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(232, 17, 35, 0.6);
-            margin-bottom: 25px;
-            animation: pulse 1.2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 30px rgba(232, 17, 35, 0.6); }
-            50% { transform: scale(1.08); box-shadow: 0 0 50px rgba(232, 17, 35, 0.9); }
-            100% { transform: scale(1); box-shadow: 0 0 30px rgba(232, 17, 35, 0.6); }
-        }
-
-        .scare-layer h1 {
-            font-size: 28px;
-            margin-bottom: 15px;
-            color: #e81123;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .scare-layer p {
-            color: #ccc;
-            font-size: 16px;
-            max-width: 500px;
-            line-height: 1.5;
-            margin-bottom: 35px;
-        }
-
-        .btn-fix {
-            padding: 15px 45px;
-            background-color: #e81123;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(232, 17, 35, 0.4);
-        }
-
-        #trollStage {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: none;
-        }
-
-        /* Ventanas Pop-up Falsas */
-        .popup-window {
-            position: absolute;
-            width: 360px;
-            background: #1c1c1c;
-            border: 2px solid #e81123;
-            border-radius: 5px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-            z-index: 100;
-            overflow: hidden;
-            display: none;
-        }
-
-        .popup-bar {
-            background: #e81123;
-            color: #fff;
-            padding: 6px 12px;
-            font-size: 12px;
-            font-weight: bold;
-            font-family: monospace;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .popup-window video {
-            width: 100%;
-            display: block;
-            background: #000;
-        }
-
-        /* Posiciones */
-        #pop1 { top: 12%; left: 8%; transform: rotate(-3deg); }
-        #pop2 { bottom: 15%; right: 10%; transform: rotate(4deg); }
-        #pop3 { top: 30%; left: 35%; width: 420px; z-index: 200; border-color: #00ff00; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html { width: 100%; height: 100%; background-color: #050505; font-family: 'Segoe UI', sans-serif; overflow: hidden; display: flex; justify-content: center; align-items: center; color: #ffffff; }
+        .scare-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #1a1111 0%, #070202 100%); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px; cursor: pointer; }
+        .alert-icon { width: 80px; height: 80px; background-color: #e81123; color: white; font-size: 50px; font-weight: bold; display: flex; justify-content: center; align-items: center; border-radius: 50%; box-shadow: 0 0 30px rgba(232, 17, 35, 0.6); margin-bottom: 25px; animation: pulse 1.2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
+        .btn-fix { padding: 15px 45px; background-color: #e81123; color: white; border: none; border-radius: 4px; font-size: 18px; font-weight: bold; cursor: pointer; }
+        #trollStage { position: relative; width: 100%; height: 100%; background: #000; display: none; }
+        .popup-window { position: absolute; width: 340px; background: #1c1c1c; border: 2px solid #e81123; border-radius: 5px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); z-index: 100; overflow: hidden; display: none; }
+        .popup-bar { background: #e81123; color: #fff; padding: 6px 12px; font-size: 12px; font-weight: bold; font-family: monospace; }
+        .popup-window video { width: 100%; display: block; background: #000; }
+        #pop1 { top: 15%; left: 5%; }
+        #pop2 { bottom: 15%; right: 5%; }
+        #pop3 { top: 30%; left: 25%; width: 380px; border-color: #00ff00; }
         #pop3 .popup-bar { background: #00ff00; color: #000; }
-
-        /* Ocultar tracks que en realidad son videos */
-        .hidden-track {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0.01;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
@@ -149,28 +26,26 @@
     <div id="scareLayer" class="scare-layer" onclick="launchTrollEngine()">
         <div class="alert-icon">!</div>
         <h1>Amenaza Crítica Detectada</h1>
-        <p>Se ha bloqueado un intento de hackeo remoto en tu dirección IP. Es necesario limpiar la caché del navegador de inmediato.</p>
-        <button class="btn-fix">Desinfectar Navegador Ahora</button>
+        <p>Se ha detectado un software malicioso intentando acceder a tus credenciales locales. Presiona el botón para iniciar desinfección.</p>
+        <button class="btn-fix">Eliminar Amenaza Ahora</button>
     </div>
 
     <div id="trollStage">
-        <video id="audio1" class="hidden-track" loop playsinline><source src="airhorn.mp4" type="video/mp4"></video>
-        <video id="audio2" class="hidden-track" loop playsinline><source src="bruh.mp4" type="video/mp4"></video>
-        <video id="audio3" class="hidden-track" loop playsinline><source src="windows_xp_error.mp4" type="video/mp4"></video>
+        <audio id="audio1" loop><source src="airhorn.mp3" type="audio/mp3"></audio>
+        <audio id="audio2" loop><source src="bruh.mp3" type="audio/mp3"></audio>
+        <audio id="audio3" loop><source src="windows_xp_error.mp3" type="audio/mp3"></audio>
 
         <div id="pop1" class="popup-window">
-            <div class="popup-bar"><span>⚠️ Windows_Defender_Trojan.exe</span><span>✕</span></div>
-            <video id="video1" loop playsinline><source src="rickroll.mp3" type="video/mp3"></video>
+            <div class="popup-bar">⚠️ Trojan.Win32.Generic</div>
+            <video id="video1" loop muted playsinline><source src="rickroll.mp4" type="video/mp4"></video>
         </div>
-
         <div id="pop2" class="popup-window">
-            <div class="popup-bar"><span>⚠️ Netstat_Inbound_Hijack_0x88</span><span>✕</span></div>
-            <video id="video2" loop playsinline><source src="john_cena.mp3" type="video/mp3"></video>
+            <div class="popup-bar">⚠️ Inbound_Hijack_Alert</div>
+            <video id="video2" loop muted playsinline><source src="john_cena.mp4" type="video/mp4"></video>
         </div>
-
         <div id="pop3" class="popup-window">
-            <div class="popup-bar"><span>🔥 MEMORY_CORRUPTION_CRITICAL</span><span>✕</span></div>
-            <video id="video3" loop playsinline><source src="nyan_cat.mp3" type="video/mp3"></video>
+            <div class="popup-bar">🔥 MEMORY_CORRUPTION</div>
+            <video id="video3" loop muted playsinline><source src="nyan_cat.mp4" type="video/mp4"></video>
         </div>
     </div>
 
@@ -181,7 +56,6 @@
             document.getElementById('scareLayer').style.display = 'none';
             document.getElementById('trollStage').style.display = 'block';
 
-            // Elementos Multimedia
             const audios = [
                 document.getElementById('audio1'),
                 document.getElementById('audio2'),
@@ -194,28 +68,40 @@
                 { win: document.getElementById('pop3'), vid: document.getElementById('video3') }
             ];
 
-            // 1. Desatar los 3 audios (que son .mp4 en tu raíz)
+            // 1. Activar metadatos de MediaSession para forzar persistencia en segundo plano
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: 'SYSTEM CRITICAL ERROR',
+                    artist: 'Windows Defender Service',
+                    album: 'Malware Sandbox Active',
+                    artwork: [{ src: 'https://via.placeholder.com/512/ff0000/ffffff?text=ALERT', sizes: '512x512', type: 'image/png' }]
+                });
+
+                // Deshabilitar los botones de pausa de la notificación para dificultar que lo detengan rápido
+                navigator.mediaSession.setActionHandler('pause', () => { 
+                    // Ignora el comando de pausa del usuario o reproduce de nuevo de inmediato
+                    audios.forEach(a => a.play());
+                });
+            }
+
+            // 2. Ejecutar tracks de audio puros (El navegador los mantendrá activos en background)
             audios.forEach(track => {
                 if (track) {
-                    track.muted = false;
                     track.volume = 1.0;
-                    track.play().catch(e => console.log("Bloqueo de audio asíncrono interceptado."));
+                    track.play().catch(e => console.log("Error de contexto de audio mitigado."));
                 }
             });
 
-            // 2. Desatar los 3 videos emergentes (que son .mp3 en tu raíz)
+            // 3. Lanzar la cascada de ventanas de video
             popups.forEach((popup, idx) => {
                 if (popup.win && popup.vid) {
                     setTimeout(() => {
                         popup.win.style.display = 'block';
-                        popup.vid.muted = false;
-                        popup.vid.volume = 1.0;
-                        popup.vid.play().catch(e => console.log("Bloqueo de video asíncrono interceptado."));
+                        popup.vid.play().catch(e => console.log("Error de contexto de video mitigado."));
                     }, idx * 200);
                 }
             });
 
-            // Fullscreen opcional
             try {
                 if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
             } catch (err) {}
