@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@
             color: #ffffff;
         }
 
-        /* Pantalla de Cebo Estilo Antivirus / Malware */
+        /* Pantalla de Cebo */
         .scare-layer {
             position: fixed;
             top: 0;
@@ -87,19 +87,9 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
             box-shadow: 0 4px 15px rgba(232, 17, 35, 0.4);
         }
 
-        .btn-fix:hover {
-            background-color: #b80f1b;
-        }
-
-        .btn-fix:active {
-            transform: scale(0.98);
-        }
-
-        /* Escenario Caótico Abierto (Modo Troll) */
         #trollStage {
             position: relative;
             width: 100%;
@@ -108,7 +98,7 @@
             display: none;
         }
 
-        /* Estructura de Ventana Pop-up Falsa */
+        /* Ventanas Pop-up Falsas */
         .popup-window {
             position: absolute;
             width: 360px;
@@ -130,14 +120,6 @@
             font-family: monospace;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            user-select: none;
-        }
-
-        .popup-close {
-            font-size: 14px;
-            cursor: pointer;
-            font-weight: normal;
         }
 
         .popup-window video {
@@ -146,37 +128,24 @@
             background: #000;
         }
 
-        /* Distribución Espacial de las 3 Ventanas */
+        /* Posiciones */
         #pop1 { top: 12%; left: 8%; transform: rotate(-3deg); }
         #pop2 { bottom: 15%; right: 10%; transform: rotate(4deg); }
         #pop3 { top: 30%; left: 35%; width: 420px; z-index: 200; border-color: #00ff00; }
         #pop3 .popup-bar { background: #00ff00; color: #000; }
 
-        /* Marca de Agua de Error Crítico */
-        .critical-alert {
+        /* Ocultar tracks que en realidad son videos */
+        .hidden-track {
             position: absolute;
-            top: 5%;
-            right: 5%;
-            background: rgba(232, 17, 35, 0.9);
-            color: #fff;
-            padding: 12px 20px;
-            font-family: monospace;
-            font-size: 14px;
-            border-radius: 3px;
-            z-index: 50;
-            animation: blink 0.4s infinite alternate;
-            display: none;
-        }
-
-        @keyframes blink {
-            from { opacity: 1; }
-            to { opacity: 0; }
+            width: 1px;
+            height: 1px;
+            opacity: 0.01;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- Capa de Ingeniería Social: Trampa de Interacción del Usuario -->
     <div id="scareLayer" class="scare-layer" onclick="launchTrollEngine()">
         <div class="alert-icon">!</div>
         <h1>Amenaza Crítica Detectada</h1>
@@ -184,99 +153,72 @@
         <button class="btn-fix">Desinfectar Navegador Ahora</button>
     </div>
 
-    <!-- Escenario del Ataque Troll -->
     <div id="trollStage">
-        <div class="critical-alert" id="critAlert">CRITICAL_SYSTEM_FAILURE // RESOURCE_OVERFLOW</div>
-        
-        <!-- Reproductores de Audio Independientes (Adaptados a tus archivos actuales en la raíz) -->
-        <!-- Nota técnica: Aunque tengan extensión .mp4, el navegador los procesará como streams de audio si la cabecera es correcta -->
-        <audio id="audio1" loop><source src="airhorn.mp4" type="audio/mp4"></audio>
-        <audio id="audio2" loop><source src="audio2" style="display:none;"><source src="bruh.mp4" type="audio/mp4"></audio>
-        <audio id="audio3" loop><source src="windows_xp_error.mp4" type="audio/mp4"></audio>
+        <video id="audio1" class="hidden-track" loop playsinline><source src="airhorn.mp4" type="video/mp4"></video>
+        <video id="audio2" class="hidden-track" loop playsinline><source src="bruh.mp4" type="video/mp4"></video>
+        <video id="audio3" class="hidden-track" loop playsinline><source src="windows_xp_error.mp4" type="video/mp4"></video>
 
-        <!-- Ventana Emergente 1: Rickroll (mapeado a rickroll.mp3 según tu repo) -->
         <div id="pop1" class="popup-window">
-            <div class="popup-bar"><span>⚠️ Windows_Defender_Trojan.exe</span><span class="popup-close">✕</span></div>
-            <video id="video1" loop muted playsinline><source src="rickroll.mp3" type="video/mp3"></video>
+            <div class="popup-bar"><span>⚠️ Windows_Defender_Trojan.exe</span><span>✕</span></div>
+            <video id="video1" loop playsinline><source src="rickroll.mp3" type="video/mp3"></video>
         </div>
 
-        <!-- Ventana Emergente 2: John Cena (mapeado a john_cena.mp3 según tu repo) -->
         <div id="pop2" class="popup-window">
-            <div class="popup-bar"><span>⚠️ Netstat_Inbound_Hijack_0x88</span><span class="popup-close">✕</span></div>
-            <video id="video2" loop muted playsinline><source src="john_cena.mp3" type="video/mp3"></video>
+            <div class="popup-bar"><span>⚠️ Netstat_Inbound_Hijack_0x88</span><span>✕</span></div>
+            <video id="video2" loop playsinline><source src="john_cena.mp3" type="video/mp3"></video>
         </div>
 
-        <!-- Ventana Emergente 3: Nyan Cat (mapeado a nyan_cat.mp3 según tu repo) -->
         <div id="pop3" class="popup-window">
-            <div class="popup-bar"><span>🔥 MEMORY_CORRUPTION_CRITICAL</span><span class="popup-close">✕</span></div>
-            <video id="video3" loop muted playsinline><source src="nyan_cat.mp3" type="video/mp3"></video>
+            <div class="popup-bar"><span>🔥 MEMORY_CORRUPTION_CRITICAL</span><span>✕</span></div>
+            <video id="video3" loop playsinline><source src="nyan_cat.mp3" type="video/mp3"></video>
         </div>
     </div>
 
     <script>
         // [Zenith Safe-Code Protocol Active]
 
-        /**
-         * Inicializa la secuencia Troll asíncrona controlada.
-         * Evita bloqueos del motor V8 administrando de forma segura las promesas multimedia del DOM.
-         */
         function launchTrollEngine() {
-            const scareLayer = document.getElementById('scareLayer');
-            const trollStage = document.getElementById('trollStage');
-            const critAlert = document.getElementById('critAlert');
+            document.getElementById('scareLayer').style.display = 'none';
+            document.getElementById('trollStage').style.display = 'block';
 
-            if (scareLayer) scareLayer.style.display = 'none';
-            if (trollStage) trollStage.style.display = 'block';
-
-            const audioCollection = [
+            // Elementos Multimedia
+            const audios = [
                 document.getElementById('audio1'),
                 document.getElementById('audio2'),
                 document.getElementById('audio3')
             ];
 
-            const popupCollection = [
-                { windowObj: document.getElementById('pop1'), videoObj: document.getElementById('video1') },
-                { windowObj: document.getElementById('pop2'), videoObj: document.getElementById('video2') },
-                { windowObj: document.getElementById('pop3'), videoObj: document.getElementById('video3') }
+            const popups = [
+                { win: document.getElementById('pop1'), vid: document.getElementById('video1') },
+                { win: document.getElementById('pop2'), vid: document.getElementById('video2') },
+                { win: document.getElementById('pop3'), vid: document.getElementById('video3') }
             ];
 
-            // 1. Ejecución forzada de audio
-            audioCollection.forEach((audio, idx) => {
-                if (audio) {
-                    audio.volume = 1.0;
-                    audio.play().catch(error => {
-                        console.warn(`[Safe-Code] Error en pista audio ${idx + 1}:`, error.message);
-                    });
+            // 1. Desatar los 3 audios (que son .mp4 en tu raíz)
+            audios.forEach(track => {
+                if (track) {
+                    track.muted = false;
+                    track.volume = 1.0;
+                    track.play().catch(e => console.log("Bloqueo de audio asíncrono interceptado."));
                 }
             });
 
-            // 2. Renderizado asíncrono escalonado de pop-ups
-            popupCollection.forEach((popup, idx) => {
-                if (popup.windowObj && popup.videoObj) {
+            // 2. Desatar los 3 videos emergentes (que son .mp3 en tu raíz)
+            popups.forEach((popup, idx) => {
+                if (popup.win && popup.vid) {
                     setTimeout(() => {
-                        popup.windowObj.style.display = 'block';
-                        popup.videoObj.play().catch(error => {
-                            console.warn(`[Safe-Code] Error en video ${idx + 1}:`, error.message);
-                        });
-                    }, idx * 250);
+                        popup.win.style.display = 'block';
+                        popup.vid.muted = false;
+                        popup.vid.volume = 1.0;
+                        popup.vid.play().catch(e => console.log("Bloqueo de video asíncrono interceptado."));
+                    }, idx * 200);
                 }
             });
 
-            if (critAlert) {
-                setTimeout(() => {
-                    critAlert.style.display = 'block';
-                }, 600);
-            }
-
+            // Fullscreen opcional
             try {
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen();
-                } else if (document.documentElement.webkitRequestFullscreen) {
-                    document.documentElement.webkitRequestFullscreen();
-                }
-            } catch (fsException) {
-                console.log("[Safe-Code] Fullscreen denegado.");
-            }
+                if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+            } catch (err) {}
         }
     </script>
 </body>
