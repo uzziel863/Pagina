@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡ALERTA DE SEGURIDAD! Sistema Comprometido</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        /* Pantalla de Cebo Estilo Antivirus / Malware */
+        .scare-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #1a1111 0%, #070202 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            cursor: pointer;
+        }
+
+        .alert-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #e81123;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(232, 17, 35, 0.6);
+            margin-bottom: 25px;
+            animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 30px rgba(232, 17, 35, 0.6); }
+            50% { transform: scale(1.08); box-shadow: 0 0 50px rgba(232, 17, 35, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 30px rgba(232, 17, 35, 0.6); }
+        }
+
+        .scare-layer h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #e81123;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .scare-layer p {
+            color: #ccc;
+            font-size: 16px;
+            max-width: 500px;
+            line-height: 1.5;
+            margin-bottom: 35px;
+        }
+
+        .btn-fix {
+            padding: 15px 45px;
+            background-color: #e81123;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(232, 17, 35, 0.4);
+        }
+
+        .btn-fix:hover {
+            background-color: #b80f1b;
+        }
+
+        .btn-fix:active {
+            transform: scale(0.98);
+        }
+
+        /* Escenario Caótico Abierto (Modo Troll) */
+        #trollStage {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: none;
+        }
+
+        /* Estructura de Ventana Pop-up Falsa */
+        .popup-window {
+            position: absolute;
+            width: 360px;
+            background: #1c1c1c;
+            border: 2px solid #e81123;
+            border-radius: 5px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            z-index: 100;
+            overflow: hidden;
+            display: none;
+        }
+
+        .popup-bar {
+            background: #e81123;
+            color: #fff;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            font-family: monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .popup-close {
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .popup-window video {
+            width: 100%;
+            display: block;
+            background: #000;
+        }
+
+        /* Distribución Espacial de las 3 Ventanas */
+        #pop1 { top: 12%; left: 8%; transform: rotate(-3deg); }
+        #pop2 { bottom: 15%; right: 10%; transform: rotate(4deg); }
+        #pop3 { top: 30%; left: 35%; width: 420px; z-index: 200; border-color: #00ff00; }
+        #pop3 .popup-bar { background: #00ff00; color: #000; }
+
+        /* Marca de Agua de Error Crítico */
+        .critical-alert {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            background: rgba(232, 17, 35, 0.9);
+            color: #fff;
+            padding: 12px 20px;
+            font-family: monospace;
+            font-size: 14px;
+            border-radius: 3px;
+            z-index: 50;
+            animation: blink 0.4s infinite alternate;
+            display: none;
+        }
+
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Capa de Ingeniería Social: Trampa de Interacción del Usuario -->
+    <div id="scareLayer" class="scare-layer" onclick="launchTrollEngine()">
+        <div class="alert-icon">!</div>
+        <h1>Amenaza Crítica Detectada</h1>
+        <p>Se ha bloqueado un intento de hackeo remoto en tu dirección IP. Es necesario limpiar la caché del navegador de inmediato.</p>
+        <button class="btn-fix">Desinfectar Navegador Ahora</button>
+    </div>
+
+    <!-- Escenario del Ataque Troll -->
+    <div id="trollStage">
+        <div class="critical-alert" id="critAlert">CRITICAL_SYSTEM_FAILURE // RESOURCE_OVERFLOW</div>
+        
+        <!-- Reproductores de Audio Independientes (Simultáneos) -->
+        <audio id="audio1" loop><source src="audios/airhorn.mp3" type="audio/mp3"></audio>
+        <audio id="audio2" loop><source src="audios/bruh.mp3" type="audio/mp3"></audio>
+        <audio id="audio3" loop><source src="audios/windows_xp_error.mp3" type="audio/mp3"></audio>
+
+        <!-- Ventana Emergente 1: Rickroll -->
+        <div id="pop1" class="popup-window">
+            <div class="popup-bar"><span>⚠️ Windows_Defender_Trojan.exe</span><span class="popup-close">✕</span></div>
+            <video id="video1" loop muted playsinline><source src="videos/rickroll.mp4" type="video/mp4"></video>
+        </div>
+
+        <!-- Ventana Emergente 2: John Cena -->
+        <div id="pop2" class="popup-window">
+            <div class="popup-bar"><span>⚠️ Netstat_Inbound_Hijack_0x88</span><span class="popup-close">✕</span></div>
+            <video id="video2" loop muted playsinline><source src="videos/john_cena.mp4" type="video/mp4"></video>
+        </div>
+
+        <!-- Ventana Emergente 3: Nyan Cat -->
+        <div id="pop3" class="popup-window">
+            <div class="popup-bar"><span>🔥 MEMORY_CORRUPTION_CRITICAL</span><span class="popup-close">✕</span></div>
+            <video id="video3" loop muted playsinline><source src="videos/nyan_cat.mp4" type="video/mp4"></video>
+        </div>
+    </div>
+
+    <script>
+        // [Zenith Safe-Code Protocol Active]
+
+        /**
+         * Inicializa la secuencia Troll asíncrona controlada.
+         * Evita bloqueos del motor V8 administrando de forma segura las promesas multimedia del DOM.
+         */
+        function launchTrollEngine() {
+            // Manejo estricto de elementos del DOM
+            const scareLayer = document.getElementById('scareLayer');
+            const trollStage = document.getElementById('trollStage');
+            const critAlert = document.getElementById('critAlert');
+
+            if (scareLayer) scareLayer.style.display = 'none';
+            if (trollStage) trollStage.style.display = 'block';
+
+            // Arreglo estructural de audios con nivel de ganancia configurado al máximo
+            const audioCollection = [
+                document.getElementById('audio1'),
+                document.getElementById('audio2'),
+                document.getElementById('audio3')
+            ];
+
+            // Mapeo de contenedores y nodos de video de las ventanas emergentes
+            const popupCollection = [
+                { windowObj: document.getElementById('pop1'), videoObj: document.getElementById('video1') },
+                { windowObj: document.getElementById('pop2'), videoObj: document.getElementById('video2') },
+                { windowObj: document.getElementById('pop3'), videoObj: document.getElementById('video3') }
+            ];
+
+            // 1. Ejecución forzada en paralelo de las pistas de audio
+            audioCollection.forEach((audio, idx) => {
+                if (audio) {
+                    audio.volume = 1.0;
+                    audio.play().catch(error => {
+                        console.warn(`[Safe-Code Context] Error al iniciar pista corta de audio ${idx + 1}:`, error.message);
+                    });
+                }
+            });
+
+            // 2. Renderizado asíncrono escalonado de pop-ups y activación de video
+            popupCollection.forEach((popup, idx) => {
+                if (popup.windowObj && popup.videoObj) {
+                    // Retardo controlado (0ms, 250ms, 500ms) para simular propagación de virus real
+                    setTimeout(() => {
+                        popup.windowObj.style.display = 'block';
+                        popup.videoObj.play().catch(error => {
+                            console.warn(`[Safe-Code Context] Error al inicializar render de video ${idx + 1}:`, error.message);
+                        });
+                    }, idx * 250);
+                }
+            });
+
+            // 3. Activación de elementos decorativos de la interfaz
+            if (critAlert) {
+                setTimeout(() => {
+                    critAlert.style.display = 'block';
+                }, 600);
+            }
+
+            // 4. Intento de escalamiento a pantalla completa (Políticas del agente de usuario)
+            try {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { /* Safari / iOS */
+                    document.documentElement.webkitRequestFullscreen();
+                }
+            } catch (fsException) {
+                console.log("[Safe-Code Context] Solicitud de Fullscreen interceptada por sandbox del navegador.");
+            }
+        }
+    </script>
+</body>
+</html>
