@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VideoTube 🔥</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --card: #1a1a24;
+    --border: #2a2a3a;
+    --accent: #ff3d5a;
+    --accent2: #7b5ea7;
+    --gold: #ffd166;
+    --text: #f0f0f8;
+    --muted: #8888aa;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAVBAR */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .nav-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+    cursor: pointer;
+  }
+
+  /* HERO PLAYER */
+  .hero {
+    max-width: 960px;
+    margin: 32px auto 0;
+    padding: 0 20px;
+  }
+
+  .player-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(255,61,90,0.15), 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  .player-wrap iframe {
+    width: 100%; height: 100%;
+    border: none;
+    display: block;
+  }
+
+  .player-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* VIDEO INFO */
+  .video-info {
+    margin-top: 18px;
+  }
+
+  .video-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+
+  .video-meta {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  /* ACTION BAR */
+  .action-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 20px;
+    border-radius: 50px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s, background .15s;
+  }
+
+  .btn:active { transform: scale(.95); }
+
+  .btn-like {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-like:hover { box-shadow: 0 0 18px rgba(255,61,90,.5); }
+  .btn-like.liked { background: #fff; color: var(--accent); }
+
+  .btn-dislike {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-dislike:hover { background: var(--border); }
+
+  .btn-share {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-share:hover { background: var(--border); }
+
+  .btn-sub {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    padding: 9px 26px;
+    margin-left: auto;
+  }
+  .btn-sub:hover { box-shadow: 0 0 20px rgba(123,94,167,.5); }
+  .btn-sub.subbed { background: var(--card); border: 1px solid var(--border); }
+
+  /* CHANNEL ROW */
+  .channel-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  .channel-avatar {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff3d5a, #7b5ea7);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .channel-info .name {
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .channel-info .subs {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* COMMENTS */
+  .comments-section h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .comment-input-wrap {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .comment-input-wrap .mini-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px;
+  }
+
+  .comment-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 8px 0;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .comment-input:focus { border-bottom-color: var(--accent); }
+
+  .comment-send {
+    align-self: flex-end;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 7px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: box-shadow .15s;
+  }
+  .comment-send:hover { box-shadow: 0 0 14px rgba(255,61,90,.4); }
+
+  .comment {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    animation: fadeUp .3s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .comment-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .comment-body .user {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  .comment-body .time {
+    color: var(--muted);
+    font-size: 11px;
+    margin-left: 8px;
+  }
+
+  .comment-body .text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #d0d0e8;
+  }
+
+  .comment-likes {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .comment-like-btn {
+    background: none; border: none;
+    color: var(--muted); cursor: pointer;
+    font-size: 12px; display: flex; align-items: center; gap: 4px;
+    transition: color .15s;
+  }
+  .comment-like-btn:hover { color: var(--accent); }
+
+  /* SIDEBAR / RELATED */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .sidebar h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .related-card {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 8px;
+    transition: background .18s;
+    border: 1px solid transparent;
+  }
+  .related-card:hover {
+    background: var(--card);
+    border-color: var(--border);
+  }
+  .related-card.active {
+    background: var(--card);
+    border-color: var(--accent);
+  }
+
+  .related-thumb {
+    width: 120px;
+    aspect-ratio: 16/9;
+    border-radius: 7px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    overflow: hidden;
+  }
+
+  .related-thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+
+  .related-info .rtitle {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+
+  .related-info .rmeta {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 9999;
+    transition: transform .3s ease;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .tab {
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    transition: color .15s, border-color .15s;
+    margin-bottom: -1px;
+  }
+  .tab.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    background: var(--gold);
+    color: #1a1a00;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 50px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 720px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+    nav { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <span class="logo">📺 VideoTube</span>
+  <div class="nav-right">
+    <div class="nav-avatar">YO</div>
+  </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div style="margin-top:28px;">
+  <div class="layout">
+
+    <!-- LEFT: PLAYER + INFO -->
+    <div class="main-col">
+      <div class="player-wrap">
+        <iframe id="mainPlayer" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0" allowfullscreen allow="autoplay"></iframe>
+        <div class="player-overlay"></div>
+      </div>
+
+      <div class="video-info">
+        <div class="video-title" id="mainTitle">Never Gonna Give You Up 🎵</div>
+        <div class="video-meta" id="mainMeta">1.4B vistas · Hace 16 años · Rick Astley</div>
+
+        <div class="action-bar">
+          <button class="btn btn-like" id="likeBtn" onclick="toggleLike()">
+            👍 <span id="likeCount">2.1M</span>
+          </button>
+          <button class="btn btn-dislike" onclick="toast('😂 Bro no puede no gustarle esto')">
+            👎 Dislike
+          </button>
+          <button class="btn btn-share" onclick="toast('🔗 Link copiado al portapapeles!')">
+            🔗 Compartir
+          </button>
+          <button class="btn btn-sub" id="subBtn" onclick="toggleSub()">
+            🔔 Suscribirse
+          </button>
+        </div>
+
+        <div class="channel-row">
+          <div class="channel-avatar">R</div>
+          <div class="channel-info">
+            <div class="name" id="channelName">Rick Astley Official <span class="badge">✓ Verificado</span></div>
+            <div class="subs" id="channelSubs">3.8M suscriptores</div>
+          </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab('comments')">💬 Comentarios <span class="badge" id="commentCount">127</span></div>
+          <div class="tab" onclick="switchTab('desc')">📄 Descripción</div>
+        </div>
+
+        <!-- COMMENTS -->
+        <div id="tab-comments">
+          <div class="comment-input-wrap">
+            <div class="mini-avatar">YO</div>
+            <input class="comment-input" id="commentInput" type="text" placeholder="Añade un comentario...">
+            <button class="comment-send" onclick="postComment()">Publicar</button>
+          </div>
+          <div id="commentList"></div>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div id="tab-desc" style="display:none; color:var(--muted); font-size:14px; line-height:1.7;" id="descTab">
+          <span id="descText"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: SIDEBAR -->
+    <div class="sidebar">
+      <h3>Siguientes Videos</h3>
+      <div id="relatedList"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const videos = [
+    {
+      id: 'dQw4w9WgXcQ',
+      title: 'Never Gonna Give You Up 🎵',
+      channel: 'Rick Astley Official',
+      verified: true,
+      subs: '3.8M suscriptores',
+      views: '1.4B vistas · Hace 16 años',
+      likes: '2.1M',
+      comments: 127,
+      desc: 'El clásico de todos los tiempos. Nunca te vamos a dejar ir, nunca te vamos a decepcionar. El Rickroll original que conquistó el internet.',
+      thumb: '🎵',
+      color: '#ff3d5a'
+    },
+    {
+      id: 'AA4SohaP76k',
+      title: 'John Cena Surprise Entrance 💪',
+      channel: 'WWE Official',
+      verified: true,
+      subs: '12M suscriptores',
+      views: '890M vistas · Hace 8 años',
+      likes: '1.4M',
+      comments: 89,
+      desc: '¡Y SU NOMBRE ES JOHN CENA! 🎺 El momento más épico del wrestling. And his name is John Cena!!!',
+      thumb: '💪',
+      color: '#ff9500'
+    },
+    {
+      id: 'QH2-TGUlwu4',
+      title: 'Nyan Cat Original 🌈',
+      channel: 'PRguitarman',
+      verified: false,
+      subs: '1.2M suscriptores',
+      views: '200M vistas · Hace 13 años',
+      likes: '3.2M',
+      comments: 201,
+      desc: 'El gato volador con cuerpo de Pop-Tart que vuela por el espacio dejando un arcoíris. El meme que definió una generación. 🐱🌈',
+      thumb: '🌈',
+      color: '#7b5ea7'
+    }
+  ];
+
+  let currentVideo = 0;
+  let liked = false;
+  let subbed = false;
+
+  const defaultComments = [
+    [
+      { user: 'xX_GamerPro_Xx', color: '#ff3d5a', text: 'Este video me lo pusieron en el cole hace 10 años y aquí sigo cayendo 💀', time: 'hace 3 días', likes: 4821 },
+      { user: 'MariaLolita99', color: '#7b5ea7', text: 'NUNCA ME CANSARÉ DE ESTE VIDEO 😭❤️', time: 'hace 1 semana', likes: 2103 },
+      { user: 'TuAbuela_Online', color: '#06d6a0', text: 'Mi nieto me mandó esto y no entiendo nada pero le doy like igual', time: 'hace 2 días', likes: 9821 },
+      { user: 'ElChavo_YT', color: '#ffd166', text: 'Si estás aquí en 2026 mereces un premio 🏆', time: 'hace 5 horas', likes: 1456 },
+    ],
+    [
+      { user: 'LuchadorFan2000', color: '#ff9500', text: '🎺🎺🎺 AND HIS NAME IS JOHN CENA 🎺🎺🎺', time: 'hace 1 día', likes: 7234 },
+      { user: 'CenaSimp_oficial', color: '#ff3d5a', text: 'El nivel de epicidad de este momento está fuera de la galaxia', time: 'hace 3 semanas', likes: 3421 },
+      { user: 'ProfeDeGym', color: '#06d6a0', text: 'Uso esto para motivarme en el gym y funciona al 100%', time: 'hace 2 días', likes: 2987 },
+    ],
+    [
+      { user: 'NyanLover4ever', color: '#7b5ea7', text: 'Llevo 6 horas viendo esto y no me puedo detener 🌈', time: 'hace 4 horas', likes: 5432 },
+      { user: 'Gatito_Supremo', color: '#ff3d5a', text: 'Mi gato literalmente se queda hipnotizado con esto', time: 'hace 2 días', likes: 8765 },
+      { user: 'InternetViejo', color: '#ffd166', text: 'Esto fue lo primero que vi en internet en 2012 y aquí sigo 😌', time: 'hace 1 semana', likes: 4321 },
+      { user: 'ArcoririsYT', color: '#06d6a0', text: 'La canción ya está tatuada en mi cerebro para siempre, no me arrepiento', time: 'hace 6 horas', likes: 2100 },
+    ]
+  ];
+
+  function loadVideo(idx) {
+    currentVideo = idx;
+    const v = videos[idx];
+    liked = false;
+    subbed = false;
+
+    document.getElementById('mainPlayer').src = `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
+    document.getElementById('mainTitle').textContent = v.title;
+    document.getElementById('mainMeta').textContent = `${v.views} · ${v.channel}`;
+    document.getElementById('channelName').innerHTML = v.channel + (v.verified ? ' <span class="badge">✓ Verificado</span>' : '');
+    document.getElementById('channelSubs').textContent = v.subs;
+    document.getElementById('likeCount').textContent = v.likes;
+    document.getElementById('likeBtn').classList.remove('liked');
+    document.getElementById('subBtn').classList.remove('subbed');
+    document.getElementById('subBtn').textContent = '🔔 Suscribirse';
+    document.getElementById('commentCount').textContent = v.comments;
+    document.getElementById('descText').textContent = v.desc;
+
+    // Load comments
+    const cl = document.getElementById('commentList');
+    cl.innerHTML = '';
+    defaultComments[idx].forEach(c => renderComment(c, false));
+
+    // Update related
+    renderRelated();
+
+    // scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderComment(c, animate = true) {
+    const cl = document.getElementById('commentList');
+    const div = document.createElement('div');
+    div.className = 'comment';
+    div.innerHTML = `
+      <div class="comment-avatar" style="background:${c.color}20; color:${c.color}; border: 1px solid ${c.color}40;">
+        ${c.user[0].toUpperCase()}
+      </div>
+      <div class="comment-body">
+        <div class="user">${c.user} <span class="time">${c.time}</span></div>
+        <div class="text">${c.text}</div>
+        <div class="comment-likes">
+          <button class="comment-like-btn" onclick="likeComment(this)">👍 ${c.likes.toLocaleString()}</button>
+          <button class="comment-like-btn" onclick="toast('↩️ Respuesta enviada!')">↩️ Responder</button>
+        </div>
+      </div>`;
+    if (animate) cl.prepend(div); else cl.appendChild(div);
+  }
+
+  function likeComment(btn) {
+    const parts = btn.textContent.trim().split(' ');
+    const num = parseInt(parts[1].replace(/,/g, ''));
+    btn.textContent = `👍 ${(num + 1).toLocaleString()}`;
+    btn.style.color = 'var(--accent)';
+  }
+
+  function postComment() {
+    const input = document.getElementById('commentInput');
+    const text = input.value.trim();
+    if (!text) { toast('✏️ Escribe algo primero!'); return; }
+    renderComment({ user: 'TÚ', color: '#ff3d5a', text, time: 'ahora mismo', likes: 0 }, true);
+    input.value = '';
+    const v = videos[currentVideo];
+    v.comments++;
+    document.getElementById('commentCount').textContent = v.comments;
+    toast('💬 Comentario publicado!');
+  }
+
+  function renderRelated() {
+    const rl = document.getElementById('relatedList');
+    rl.innerHTML = '';
+    videos.forEach((v, i) => {
+      const div = document.createElement('div');
+      div.className = 'related-card' + (i === currentVideo ? ' active' : '');
+      div.onclick = () => loadVideo(i);
+      div.innerHTML = `
+        <div class="related-thumb" style="background: ${v.color}22; font-size:30px; justify-content:center; display:flex; align-items:center;">
+          ${v.thumb}
+        </div>
+        <div class="related-info">
+          <div class="rtitle">${v.title}</div>
+          <div class="rmeta">${v.channel}</div>
+          <div class="rmeta">${v.views.split('·')[0]}</div>
+        </div>`;
+      rl.appendChild(div);
+    });
+  }
+
+  function toggleLike() {
+    liked = !liked;
+    const btn = document.getElementById('likeBtn');
+    const v = videos[currentVideo];
+    const base = parseFloat(v.likes) * 1000000;
+    if (liked) {
+      btn.classList.add('liked');
+      btn.innerHTML = `❤️ <span id="likeCount">${formatNum(base + 1)}</span>`;
+      toast('❤️ Le diste like!');
+    } else {
+      btn.classList.remove('liked');
+      btn.innerHTML = `👍 <span id="likeCount">${v.likes}</span>`;
+    }
+  }
+
+  function toggleSub() {
+    subbed = !subbed;
+    const btn = document.getElementById('subBtn');
+    if (subbed) {
+      btn.classList.add('subbed');
+      btn.textContent = '✅ Suscrito';
+      toast('🔔 Suscrito! Recibirás notificaciones');
+    } else {
+      btn.classList.remove('subbed');
+      btn.textContent = '🔔 Suscribirse';
+      toast('🔕 Suscripción cancelada');
+    }
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('tab-comments').style.display = tab === 'comments' ? '' : 'none';
+    document.getElementById('tab-desc').style.display = tab === 'desc' ? '' : 'none';
+  }
+
+  function formatNum(n) {
+    if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
+    if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n/1e3).toFixed(1) + 'K';
+    return n;
+  }
+
+  let toastTimer;
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // Enter key for comment
+  document.getElementById('commentInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') postComment();
+  });
+
+  // Init
+  loadVideo(0);
+</script>
+</body>
+</html>
